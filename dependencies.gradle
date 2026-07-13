@@ -181,65 +181,28 @@ dependencies {
     api "codechicken:codechickenlib:3.2.3.358"
     // api "gregtech:gregtech:2.8.10-beta", { transitive false }
     compileOnly rfg.deobf("curse.maven:O-243363:4479688")
+    compileOnly rfg.deobf("curse.maven:O-242638:3838713")
     
 
-    mod_dependencies.each { k, v ->
-        def mod = rfg.deobf('curse.maven:' + k)
-        compileOnly mod
-        if (v.any { it.toBoolean() }) {
-            runtimeOnly mod
-        }
+    fileTree(dir: "${projectDir}/libs", include: '*.jar').each { jar ->
+        compileOnly rfg.deobf(files(jar))
     }
-
-    // enables mods for runtime
+    
     runtime_dependencies.each { k, v ->
         if (v.any { it.toBoolean() }) {
             runtimeOnly k
         }
     }
-
-    compileOnly rfg.deobf('curse.maven:angry-pixel-the-betweenlands-mod-243363:4479688')
-    if (debug_betweenlands.toBoolean()) {
-        // TODO: allow development toggling of the coremod
-        //  until this is resolved, download and install the jar from
-        //  https://www.curseforge.com/minecraft/mc-mods/angry-pixel-the-betweenlands-mod/files/4479688
-        // runtimeOnly rfg.deobf('curse.maven:angry-pixel-the-betweenlands-mod-243363:4479688')
-    }
-
-    compileOnly rfg.deobf('curse.maven:better-with-everything-896908:5202745')
-    if (!(debug_better_with_addons.toBoolean() || debug_better_with_mods.toBoolean()) && debug_better_with_everything.toBoolean()) {
-        runtimeOnly rfg.deobf('curse.maven:better-with-everything-896908:5202745')
-    }
-
+    
     compileOnly 'com.enderio:endercore:0.5.78'
     compileOnly 'crazypants:enderio:5.3.72'
     if (debug_enderio.toBoolean()) {
         runtimeOnly 'com.enderio:endercore:0.5.78'
         runtimeOnly 'crazypants:enderio:5.3.72'
     }
-
-    // WARNING: rotn must be placed before normal, otherwise you will not be able to properly detect sources for the LightningForge
-    compileOnly rfg.deobf('curse.maven:ice-and-fire-rotn-edition-457668:5738729')
-    compileOnly rfg.deobf('curse.maven:iceandfire-264231:2939529')
-    if (debug_ice_and_fire_rotn.toBoolean()) {
-        runtimeOnly rfg.deobf('curse.maven:ice-and-fire-rotn-edition-457668:5738729')
-    } else if (debug_ice_and_fire_old.toBoolean()) {
-        runtimeOnly rfg.deobf('curse.maven:iceandfire-264231:2939529')
-    }
-
-    // WARNING: experimental must be placed before classic, otherwise you will crash when debugging either. Check FluidGenerator compat to confirm
-    //compileOnly rfg.deobf('curse.maven:industrialcraft_experimental-242638:3838713')
-    compileOnly rfg.deobf("curse.maven:O-242638:3838713")
-    compileOnly rfg.deobf('curse.maven:industrialcraft_classic-242942:3093607')
-    if (debug_industrial_craft_2_experimental.toBoolean()) {
-        runtimeOnly rfg.deobf('curse.maven:industrialcraft_experimental-242638:3838713')
-    } else if (debug_industrial_craft_2_classic.toBoolean()) {
-        runtimeOnly rfg.deobf('curse.maven:industrialcraft_classic-242942:3093607')
-    }
-
+    
     compileOnly rfg.deobf('TechReborn:TechReborn-ModCompatibility-1.12.2:1.4.0.76:universal')
     if (debug_tech_reborn.toBoolean()) {
         runtimeOnly rfg.deobf('TechReborn:TechReborn-ModCompatibility-1.12.2:1.4.0.76:universal')
     }
-
 }
