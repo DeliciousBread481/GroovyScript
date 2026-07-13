@@ -180,14 +180,23 @@ dependencies {
 
     api "codechicken:codechickenlib:3.2.3.358"
     // api "gregtech:gregtech:2.8.10-beta", { transitive false }
+    compileOnly rfg.deobf('curse.maven:O-237903:3330308')
+    
     compileOnly rfg.deobf("curse.maven:O-243363:4479688")
     
     compileOnly rfg.deobf("curse.maven:O-242638:3838713")
     compileOnly rfg.deobf("curse.maven:O-242942:3093607")
     
+    compileOnly rfg.deobf('curse.maven:O-896908:5202745')
+    
+    compileOnly rfg.deobf('curse.maven:O-457668:5738729')
+    compileOnly rfg.deobf('curse.maven:O-264231:2939529')
+    
     fileTree(dir: "${projectDir}/libs", include: '*.jar').each { jar ->
         compileOnly rfg.deobf(files(jar))
     }
+    
+    compileOnly rfg.deobf("curse.maven:O-896908:5202745")
     
     runtime_dependencies.each { k, v ->
         if (v.any { it.toBoolean() }) {
