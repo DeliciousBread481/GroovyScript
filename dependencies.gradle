@@ -180,6 +180,7 @@ dependencies {
 
     api "codechicken:codechickenlib:3.2.3.358"
     // api "gregtech:gregtech:2.8.10-beta", { transitive false }
+    compileOnly rfg.deobf("curse.maven:O-243363:4479688")
 
     fileTree(dir: "${projectDir}/libs", include: '*.jar').each { jar ->
         compileOnly rfg.deobf(files(jar))
