@@ -1,27 +1,13 @@
 package com.cleanroommc.groovyscript.sandbox.security;
 
-import com.cleanroommc.groovyscript.api.GroovyBlacklist;
-import com.cleanroommc.groovyscript.api.IScriptReloadable;
-import com.cleanroommc.groovyscript.compat.mods.GroovyPropertyContainer;
-import com.cleanroommc.groovyscript.registry.VirtualizedRegistry;
-import com.cleanroommc.groovyscript.sandbox.GroovyLogImpl;
-import com.cleanroommc.groovyscript.sandbox.expand.LambdaClosure;
-import groovy.lang.GroovyClassLoader;
-import groovy.lang.GroovyShell;
 import groovy.lang.MetaMethod;
-import groovy.ui.GroovyMain;
-import groovy.ui.GroovySocketServer;
-import groovy.util.Eval;
-import groovy.util.GroovyScriptEngine;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import org.apache.commons.io.FileUtils;
 import org.codehaus.groovy.runtime.*;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.AnnotationNode;
 import org.objectweb.asm.tree.ClassNode;
 
-import java.io.PrintWriter;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -41,9 +27,11 @@ public class GroovySecurityManager {
     }
 
     public void initDefaults() {
-        unBanClasses("com.cleanroommc.groovyscript.sandbox.GroovyLogImpl",
+        unBanClasses(
+                "com.cleanroommc.groovyscript.sandbox.GroovyLogImpl",
                 "com.cleanroommc.groovyscript.sandbox.expand.LambdaClosure");
-        unBanClasses("org.codehaus.groovy.runtime.NullObject",
+        unBanClasses(
+                "org.codehaus.groovy.runtime.NullObject",
                 "org.codehaus.groovy.runtime.FormatHelper",
                 "org.codehaus.groovy.runtime.GStringImpl",
                 "org.codehaus.groovy.runtime.RegexSupport");
@@ -70,13 +58,24 @@ public class GroovySecurityManager {
         banPackage("org.spongepowered");
         banPackage("zone.rong.mixinbooter");
         banPackage("net.minecraftforge.gradle");
-        banClasses("java.lang.Runtime", "java.lang.ClassLoader", "java.util.Scanner");
-        banClasses("groovy.util.GroovyScriptEngine", "groovy.util.Eval", "groovy.ui.GroovyMain", "groovy.ui.GroovySocketServer", "groovy.lang.GroovyShell", "groovy.lang.GroovyClassLoader");
+        banClasses(
+                    "java.lang.Runtime", 
+                    "java.lang.ClassLoader", 
+                    "java.util.Scanner");
+        banClasses(
+                    "groovy.util.GroovyScriptEngine", 
+                    "groovy.util.Eval", 
+                    "groovy.ui.GroovyMain", 
+                    "groovy.ui.GroovySocketServer", 
+                    "groovy.lang.GroovyShell", 
+                    "groovy.lang.GroovyClassLoader");
         banMethods("java.lang.System", "exit", "gc", "setSecurityManager");
         banMethods("java.lang.Class", "getResource", "getResourceAsStream");
         banMethods("java.lang.String", "execute");
         banMethods("org.codehaus.groovy.runtime.ProcessGroovyMethods", "execute");
-        banClasses("org.apache.commons.io.FileUtils", "org.apache.logging.log4j.core.util.FileUtils");
+        banClasses(
+                    "org.apache.commons.io.FileUtils", 
+                    "org.apache.logging.log4j.core.util.FileUtils");
 
         // mod specific
         banPackage("com.cleanroommc.groovyscript.command");
