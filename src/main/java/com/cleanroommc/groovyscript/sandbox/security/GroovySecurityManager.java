@@ -1,5 +1,6 @@
 package com.cleanroommc.groovyscript.sandbox.security;
 
+import com.cleanroommc.groovyscript.api.GroovyBlacklist;
 import groovy.lang.MetaMethod;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;

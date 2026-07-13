@@ -187,8 +187,6 @@ dependencies {
     compileOnly rfg.deobf("curse.maven:O-242638:3838713")
     compileOnly rfg.deobf("curse.maven:O-242942:3093607")
     
-    compileOnly rfg.deobf('curse.maven:O-896908:5202745')
-    
     compileOnly rfg.deobf('curse.maven:O-457668:5738729')
     compileOnly rfg.deobf('curse.maven:O-264231:2939529')
     
